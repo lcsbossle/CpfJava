@@ -10,6 +10,7 @@ public class Cpf
     private List<Integer> digitos = new ArrayList<Integer>();
     private List<Integer> multiplicadores1 = new ArrayList<Integer>();
     private List<Integer> multiplicadores2 = new ArrayList<Integer>();
+    private boolean valid;
     
     public Cpf(String cpfString)
     {
@@ -78,7 +79,7 @@ public class Cpf
         return digitos;
     }
     
-    public Integer calcularDigito1()
+    private Integer calcularDigito1()
     {
         Integer sum = 0;
         Integer resto = 0;
@@ -101,7 +102,7 @@ public class Cpf
         return dig1;
     }
     
-    public Integer calcularDigito2()
+    private Integer calcularDigito2()
     {
         Integer sum = 0;
         Integer resto = 0;
@@ -140,15 +141,19 @@ public class Cpf
                 this.digitos.get(8).equals(this.digitos.get(9))
                 )
         {
-            return false;
+            this.valid = false;
+            return valid;
         }
         if(this.calcularDigito1() != this.digitos.get(9)){
-            return false;
+            this.valid = false;
+            return valid;
         }
         if(this.calcularDigito2() != this.digitos.get(10)){
-            return false;
+            this.valid = false;
+            return valid;
         }
-        return true;
+        this.valid = true;
+        return valid;
     }
 
     public List<Integer> getDigitos() {
