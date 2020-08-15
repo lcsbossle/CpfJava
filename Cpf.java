@@ -2,6 +2,7 @@ package CpfJava;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Cpf
@@ -28,6 +29,7 @@ public class Cpf
         {
             this.multiplicadores2.add(11-j);
         }
+        this.setValid();
     }
     
     
@@ -59,6 +61,7 @@ public class Cpf
         {
             this.cpfString += Integer.toString(d);
         }
+        this.setValid();
     }
     
     private List<Integer> digitosFromString(String str){
@@ -126,9 +129,9 @@ public class Cpf
         return dig2;
     }
 
-    
-    public boolean isValid()
+    private void setValid()
     {
+        this.valid = true;
         if(
                 this.digitos.get(0).equals(this.digitos.get(1)) &&
                 this.digitos.get(1).equals(this.digitos.get(2)) &&
@@ -142,21 +145,21 @@ public class Cpf
                 )
         {
             this.valid = false;
-            return valid;
         }
-        if(this.calcularDigito1() != this.digitos.get(9)){
+        if(
+                !Objects.equals(this.calcularDigito1(), this.digitos.get(9)) ||
+                !Objects.equals(this.calcularDigito2(), this.digitos.get(10))
+                ){
             this.valid = false;
-            return valid;
         }
-        if(this.calcularDigito2() != this.digitos.get(10)){
-            this.valid = false;
-            return valid;
-        }
-        this.valid = true;
-        return valid;
+    }
+    
+    public boolean isValid()
+    {
+        return this.valid;
     }
 
-    public List<Integer> getDigitos() {
+    private List<Integer> getDigitos() {
         return digitos;
     }
 
