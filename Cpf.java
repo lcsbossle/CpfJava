@@ -93,7 +93,6 @@ public class Cpf
         {
             sum += this.digitos.get(i) * this.multiplicadores1.get(i);
         }
-        
         resto = sum % 11;
         
         if(resto < 2){
@@ -116,8 +115,7 @@ public class Cpf
         {
             sum += this.digitos.get(j) * this.multiplicadores2.get(j);
         }
-        
-                resto = sum % 11;
+        resto = sum % 11;
         
         if(resto < 2){
             dig2 = 0;
@@ -125,7 +123,6 @@ public class Cpf
         else {
             dig2 = 11 - resto;
         }
-
         return dig2;
     }
 
